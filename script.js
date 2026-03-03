@@ -71,9 +71,21 @@ function registerUser() {
 
 let cartCount = 0;
 
-function addToCart() {
+function getCartItems() {
+    return JSON.parse(localStorage.getItem('cart')) || [];
+}
+
+function addToCart(item) {
+    if (!item || !item.id) return;
+    const cart = getCartItems();
+    const existing = cart.find(x => x.id === item.id);
+    if (existing) {
+        existing.quantity = (existing.quantity || 1) + 1;
+    } else {
+        cart.push({ id: item.id, name: item.name, price: item.price, quantity: 1 });
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
     cartCount++;
-    console.log('addToCart called, cartCount=', cartCount);
     showToast('Item added to cart!');
 }
 
@@ -95,12 +107,6 @@ function filterCategory(event, category) {
 function goToCart() {
     window.location.href = "cart.html";
 }
- // Sample cart data - replace with actual data from your backend
-    const cartItems = [
-      { id: 1, name: "Bacon", price: 75, quantity: 1 },
-      { id: 2, name: "Extra Fried Rice", price:75, quantity: 1 },
-      { id: 3, name: "Bopis", price: 75, quantity: 1 }
-    ];
 
 // default menu entries for first-time visitors
 // give each item an id so it can be removed later
@@ -119,7 +125,7 @@ const DEFAULT_MENU = [
     function initializeOrder() {
       const tableBody = document.getElementById('orderTableBody');
       tableBody.innerHTML = '';
-
+      const cartItems = getCartItems();
 
       cartItems.forEach((item, index) => {
         const row = document.createElement('tr');
@@ -143,7 +149,7 @@ const DEFAULT_MENU = [
     function updateTotal() {
       const quantityInputs = document.querySelectorAll('.quantity-input');
       let subtotal = 0;
-
+      const cartItems = getCartItems();
 
       quantityInputs.forEach((input, index) => {
         const quantity = parseInt(input.value) || 0;
@@ -166,20 +172,25 @@ const DEFAULT_MENU = [
 
 
     function confirmOrder() {
+      const cartItems = getCartItems();
+      if (cartItems.length === 0) {
+        alert('Please add at least one item to your order. Add items from the menu first.');
+        return;
+      }
+
       const quantityInputs = document.querySelectorAll('.quantity-input');
       const noteInputs = document.querySelectorAll('.note-input');
-     
       const items = [];
       let total = 0;
      
       quantityInputs.forEach((input, index) => {
         const quantity = parseInt(input.value) || 0;
-        const notes = noteInputs[index].value;
+        const cartItem = cartItems[index];
+        if (!cartItem) return;
        
         if (quantity > 0) {
-          const itemName = cartItems[index].name;
-          items.push(itemName + (quantity > 1 ? ' x' + quantity : ''));
-          total += cartItems[index].price * quantity;
+          items.push(cartItem.name + (quantity > 1 ? ' x' + quantity : ''));
+          total += cartItem.price * quantity;
         }
       });
 
@@ -188,7 +199,7 @@ const DEFAULT_MENU = [
         return;
       }
 
-      const notes = noteInputs.find(el => el.value)?.value || '';
+      const notes = Array.from(noteInputs).find(el => el && el.value)?.value || '';
       
       // generate queue number and create order entry
       const orders = JSON.parse(localStorage.getItem('orders')) || [];
@@ -208,6 +219,7 @@ const DEFAULT_MENU = [
       orders.push(newOrder);
       localStorage.setItem('orders', JSON.stringify(orders));
       sessionStorage.setItem('lastOrderId', orderId);
+      localStorage.removeItem('cart');
       window.location.href = 'order-confirmation.html';
     }
 
@@ -482,7 +494,7 @@ function loadMenuItems() {
                 const btn = document.createElement('button');
                 if (item.available) {
                     btn.textContent = 'Add to cart';
-                    btn.onclick = addToCart;
+                    btn.onclick = () => addToCart(item);
                 } else {
                     btn.textContent = 'Unavailable';
                     btn.disabled = true;
@@ -641,12 +653,15 @@ window.addEventListener('DOMContentLoaded', () => {
         }
 
 
+        let orderFilterStatus = 'pending';
+
         function render(){
             const container = document.getElementById('orders');
             const orders = loadOrders();
-            orders.sort((a,b)=>a.queue - b.queue);
+            const filtered = orders.filter(o=>(o.status||'pending')===orderFilterStatus);
+            filtered.sort((a,b)=>a.queue - b.queue);
             container.innerHTML='';
-            orders.forEach(o=>{
+            filtered.forEach(o=>{
                 const el = document.createElement('div'); el.className='order';
                 const meta = document.createElement('div'); meta.className='meta';
                 meta.innerHTML = `<div>ORDER ${o.queue} - ${o.student}</div><div class="status-pill">${capitalize(o.status)}</div>`;
@@ -703,6 +718,15 @@ window.addEventListener('DOMContentLoaded', () => {
             if(e.key==='orders' || e.key==='orders_updated_at') render();
         });
 
+        // Order status tab switching (staff dashboard)
+        document.querySelectorAll('.order-tab').forEach(tab=>{
+            tab.addEventListener('click', ()=>{
+                document.querySelectorAll('.order-tab').forEach(t=>t.classList.remove('active'));
+                tab.classList.add('active');
+                orderFilterStatus = tab.getAttribute('data-status') || 'pending';
+                render();
+            });
+        });
 
         // initial render
         render();

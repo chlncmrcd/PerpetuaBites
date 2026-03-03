@@ -1004,6 +1004,32 @@ footer {
         footer{background:var(--accent);color:#fff;padding:10px;text-align:center;font-weight:700}
         .status-pill{padding:6px 8px;border-radius:999px;font-size:12px;font-weight:700}
 
+        /* Order status navigation tabs - staff dashboard */
+        .order-nav-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+        .order-tab {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 8px;
+            background: #e3e3e3;
+            color: #666;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.2s, color 0.2s;
+        }
+        .order-tab:hover {
+            background: #d0d0d0;
+        }
+        .order-tab.active {
+            background: var(--blue);
+            color: #fff;
+        }
+
 /* Mobile Cart Page Styles */
 @media (max-width: 600px) {
     .container {
