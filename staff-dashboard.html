@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Dashboard - PerpetuaBites</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dashboard">
+<header class="top-bar">
+    PerpetuaBites
+</header>
+
+<div class="container">
+    <h1 class="title">STAFF DASHBOARD</h1>
+    <main>
+            <div class="header-row">
+                <div class="text-blue-800">Incoming Orders</div>
+                <div class="text-gray-small">Sorted by Queue #</div>
+            </div>
+
+
+            <div id="orders" class="order-list"></div>
+
+
+            <!-- Staff Menu Portal -->
+            <section id="menu-portal">
+                <div class="subheader-row">
+                    <div class="text-blue-800">Staff Menu Portal</div>
+                    <div class="text-gray-small">Manage foods & drinks</div>
+                </div>
+                <div class="portal-box">
+                    <form id="addItemForm">
+                        <input id="itemName" placeholder="Item name (e.g. Turon)" required />
+                        <input id="itemPrice" type="number" placeholder="Price (₱)" min="0" step="0.01" required />
+                        <input id="itemPhoto" type="file" accept="image/*" />
+                        <select id="itemCategory">
+                            <option value="meals">Meals</option>
+                            <option value="snacks">Snacks</option>
+                            <option value="drinks">Drinks</option>
+                            <option value="desserts">Desserts</option>
+                        </select>
+                        <label><input id="itemAvailable" type="checkbox" checked /> Available</label>
+                        <button type="submit">Add</button>
+                    </form>
+                    <!-- staff version of the menu uses the same card grid as customers -->
+                    <div class="categories">
+                        <span class="active" onclick="filterCategory(event,'meals')">Meals</span>
+                        <span onclick="filterCategory(event,'snacks')">Snacks</span>
+                        <span onclick="filterCategory(event,'drinks')">Drinks</span>
+                        <span onclick="filterCategory(event,'desserts')">Desserts</span>
+                    </div>
+                    <div id="staffMenuGrid" class="menu-grid"></div>
+                </div>
+            </section>
+        </main>
+        </div>
+<footer>
+    PerpetuaBites
+</footer>
+<script src="script.js"></script>
+</body>
+</html>

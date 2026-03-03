@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation - PerpetuaBites</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="top-bar">
+     PerpetuaBites 
+</header>
+    <div class="container">
+    <img src="images/logo.png" alt="Logo" class="logo">
+
+
+
+    <!-- Queue Number Display -->
+    <div class="queue-container">
+      <div class="queue-label">Your Queue Number</div>
+      <div class="queue-number" id="queueNumber">Loading...</div>
+      <div class="queue-message">Please keep this number for reference</div>
+    </div>
+
+
+    <!-- Order Status Section -->
+    <div class="status-section">
+      <div class="status-header">Order Status</div>
+
+
+      <div class="status-timeline-wrapper">
+        <div class="status-step completed">
+          <div class="status-dot">✓</div>
+          <div class="status-label">Confirmed</div>
+        </div>
+        <div class="status-connector completed"></div>
+
+
+        <div class="status-step active">
+          <div class="status-dot">⏳</div>
+          <div class="status-label">Preparing</div>
+        </div>
+        <div class="status-connector"></div>
+
+
+        <div class="status-step">
+          <div class="status-dot">📦</div>
+          <div class="status-label">Ready</div>
+        </div>
+        <div class="status-connector"></div>
+
+
+        <div class="status-step">
+          <div class="status-dot">✓</div>
+          <div class="status-label">Completed</div>
+        </div>
+      </div>
+
+
+      <!-- Time Estimate -->
+      <div class="time-estimate">
+        <div class="time-estimate-label">Estimated Wait Time:</div>
+        <div class="time-estimate-value">~15 minutes</div>
+      </div>
+
+
+      <!-- Order Details -->
+      <div class="order-details">
+        <div class="detail-title">Order Date & Time:</div>
+        <div class="detail-content" id="orderDateTime">Loading...</div>
+
+
+        <div class="detail-title">Items Ordered:</div>
+        <div class="order-items-list" id="orderItemsList">
+          <div class="order-item">Loading...</div>
+        </div>
+
+
+        <div class="detail-title">Special Notes:</div>
+        <div class="detail-content" id="specialNotes">None</div>
+
+
+        <div class="detail-title">Total Amount:</div>
+        <div class="detail-content detail-amount">₱<span id="totalAmount">0</span></div>
+      </div>
+    </div>
+
+
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+      <button class="btn btn-track" onclick="trackOrder()">Track My Order</button>
+      <button class="btn btn-home" onclick="goHome()">Back to Menu</button>
+    </div>
+  </div>
+
+
+<footer>
+    PerpetuaBites
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
