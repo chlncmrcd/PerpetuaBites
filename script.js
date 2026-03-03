@@ -87,6 +87,20 @@ function addToCart(item) {
     localStorage.setItem('cart', JSON.stringify(cart));
     cartCount++;
     showToast('Item added to cart!');
+    updateCartBadge();
+}
+
+function getCartItemCount() {
+    const cart = getCartItems();
+    return cart.reduce((sum, item) => sum + (item.quantity || 0), 0);
+}
+
+function updateCartBadge() {
+    const badge = document.getElementById('cartBadge');
+    if (!badge) return;
+    const count = getCartItemCount();
+    badge.textContent = count;
+    badge.classList.toggle('hidden', count === 0);
 }
 
 function filterCategory(event, category) {
@@ -127,6 +141,15 @@ const DEFAULT_MENU = [
       tableBody.innerHTML = '';
       const cartItems = getCartItems();
 
+      if (cartItems.length === 0) {
+        const row = document.createElement('tr');
+        row.innerHTML = '<td colspan="6" class="empty-cart-msg">Your cart is empty. Add items from the menu!</td>';
+        tableBody.appendChild(row);
+        document.getElementById('subtotal').textContent = '0';
+        document.getElementById('totalAmount').textContent = '0';
+        return;
+      }
+
       cartItems.forEach((item, index) => {
         const row = document.createElement('tr');
         const subtotal = item.price * item.quantity;
@@ -137,12 +160,21 @@ const DEFAULT_MENU = [
           <td><input type="number" value="${item.quantity}" min="1" class="quantity-input" data-index="${index}" onchange="updateTotal()"></td>
           <td><textarea placeholder="Add special notes..." class="note-input" data-index="${index}"></textarea></td>
           <td class="price">₱<span class="item-subtotal">${subtotal}</span></td>
+          <td><button type="button" class="remove-item-btn" onclick="removeCartItem(${index})" title="Remove item">✕</button></td>
         `;
         tableBody.appendChild(row);
       });
 
 
       updateTotal();
+    }
+
+    function removeCartItem(index) {
+      const cartItems = getCartItems();
+      if (index < 0 || index >= cartItems.length) return;
+      cartItems.splice(index, 1);
+      localStorage.setItem('cart', JSON.stringify(cartItems));
+      initializeOrder();
     }
 
 
@@ -330,12 +362,16 @@ const DEFAULT_MENU = [
         }
     }
     
-    // Check track button visibility on menu page load
+    // Check track button visibility and cart badge on menu page load
     if (document.location.pathname.includes('canteen-menu.html')) {
         if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', checkAndShowTrackButton);
+            document.addEventListener('DOMContentLoaded', () => {
+                checkAndShowTrackButton();
+                updateCartBadge();
+            });
         } else {
             checkAndShowTrackButton();
+            updateCartBadge();
         }
     }
     
