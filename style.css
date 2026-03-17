@@ -1,3 +1,7 @@
+/* =========================
+   GLOBAL RESET / BASE STYLES
+   Used on all pages
+   ========================= */
 * {
     margin: 0;
     padding: 0;
@@ -5,24 +9,35 @@
     font-family: Arial, sans-serif;
 }
 
-body {
-    background-color: #f8e79a;
+html, body {
+    height: 100%;
 }
 
-/* TOP ORANGE BAR */
+body {
+    background-color: #f8e79a;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* TOP ORANGE BAR (shared header) */
 .top-bar {
     background-color: #BA3801;
-    height: 60px;
+    height: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0 30px;
+    padding: 5px;
     position: relative;
     color: white;  
     font-weight: bold;
-    font-size: 22px;
+    font-size: 20px;
     text-align: center;
 }
+/* =========================
+   LANDING + LOGIN PAGES
+   index.html, customer-login.html, staff-login.html, register.html
+   ========================= */
 .login-box {
   background-color: #fff0a2; /* yellow same as body */
   padding: 70px 50px;
@@ -151,6 +166,10 @@ input, select {
       font-size: 16px;
     }
 
+/* =========================
+   CART ICON + TRACK ORDER BUTTON
+   (canteen-menu.html header)
+   ========================= */
 .cart-icon {
     font-size: 24px;
     background: none;
@@ -173,10 +192,10 @@ input, select {
     background-color: #f39c12;
     color: white;
     border: none;
-    padding: 8px 14px;
-    border-radius: 6px;
+    padding: 12px 22px;
+    border-radius: 10px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: bold;
     transition: background-color 0.3s;
 }
@@ -216,6 +235,36 @@ input, select {
 }
 
 
+/* generic back button icon (top-left) */
+.back-btn {
+    position: fixed;
+    left: 12px;
+    z-index: 1100;
+    background-color: transparent;
+    border: none;
+    color: #e0e0e0;
+    cursor: pointer;
+    font-size: 26px;
+    line-height: 1;
+    padding: 4px 6px;
+}
+
+.back-btn:hover {
+    transform: scale(1.05);
+}
+
+/* bottom track order button wrapper (menu page) */
+.track-bottom-wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0 10px;
+}
+
+
+/* =========================
+   CUSTOMER MENU PAGE
+   canteen-menu.html
+   ========================= */
 /* MAIN CONTAINER */
 .container {
     text-align: center;
@@ -397,6 +446,10 @@ input, select {
     }
 
 
+    /* =========================
+       CART PAGE
+       cart.html
+       ========================= */
     .order-table {
       width: 100%;
       background-color: #fff;
@@ -438,6 +491,11 @@ input, select {
 
     .order-table tbody tr:last-child td {
       border-bottom: none;
+    }
+
+    .notes-row td {
+      padding-top: 6px;
+      padding-bottom: 16px;
     }
 
     .remove-item-btn {
@@ -526,6 +584,84 @@ input, select {
       font-weight: bold;
     }
 
+
+    /* Add-ons Section */
+    .addons-section {
+      background-color: #f9f9f9;
+      padding: 20px;
+      border-radius: 10px;
+      margin: 20px 0;
+      border-left: 4px solid #5670b0;
+    }
+
+    .addons-section h3 {
+      margin-bottom: 15px;
+      color: #5670b0;
+      font-size: 18px;
+    }
+
+    .addons-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 15px;
+    }
+
+    .addon-item {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      background: white;
+      border-radius: 8px;
+      border: 1px solid #e0e0e0;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      font-size: 14px;
+    }
+
+    .addon-item:hover {
+      background-color: #f0f8ff;
+    }
+
+    .addon-item input[type="checkbox"] {
+      margin-right: 8px;
+      transform: scale(1.2);
+    }
+
+    .addons-total {
+      font-weight: bold;
+      color: #bd4d1d;
+      font-size: 16px;
+      text-align: right;
+    }
+
+    /* Global Notes */
+    .global-notes-section {
+      background-color: #fff8e1;
+      padding: 20px;
+      border-radius: 10px;
+      margin: 20px 0;
+      border-left: 4px solid #bd4d1d;
+    }
+
+    .global-notes-section label {
+      display: block;
+      color: #5670b0;
+      font-weight: bold;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    .global-notes-section textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #5670b0;
+      border-radius: 8px;
+      font-size: 14px;
+      resize: vertical;
+      min-height: 80px;
+      font-family: Arial, sans-serif;
+    }
 
     .total-price {
       background-color: #f0f8ff;
@@ -634,7 +770,7 @@ input, select {
 
 
     .queue-number {
-      font-size: 120px;
+      font-size: 60px;
       font-weight: bold;
       color: #bd4d1d;
       line-height: 1;
@@ -869,28 +1005,102 @@ input, select {
       transform: scale(1.02);
     }
 
+    .btn-cancel {
+      background-color: #e74c3c;
+      color: white;
+    }
+
+    .btn-cancel:hover {
+      background-color: #c0392b;
+      transform: scale(1.02);
+    }
+
+
 
 
 /* FOOTER */
 footer {
-    margin-top: 50px;
     background-color: #BA3801;
     color: white;
-    padding: 20px;
-    font-size: 22px;
+    height: 40px;              /* match header height */
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
     font-weight: bold;
     text-align: center;
+    margin-top: auto;          /* push footer to bottom when content is short */
 }
 
-/* Tablet */
+/* Tablet menu layout */
 @media (max-width: 1024px) {
     .menu-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
-/* Mobile - ALWAYS 2 COLUMNS */
+/* Global mobile layout tweaks (phones) */
 @media (max-width: 600px) {
+    body {
+        font-size: 14px;
+    }
+
+    .top-bar {
+        height: 70px;              /* match desktop height */
+        padding: 0 16px;
+        font-size: 24px;           /* keep consistent with footer */
+        display: flex;
+        flex-direction: row;
+        justify-content: center;   /* center title text */
+        align-items: center;
+        text-align: center;
+    }
+
+    .header-buttons {
+        position: absolute;        /* float buttons on the right */
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        margin-top: 0;
+        width: auto;
+        justify-content: flex-end;
+        gap: 10px;
+    }
+
+    .track-btn {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+
+    .cart-icon {
+        font-size: 22px;
+    }
+
+    .cart-badge {
+        top: -4px;
+        right: -4px;
+        min-width: 16px;
+        height: 16px;
+        font-size: 10px;
+    }
+
+    .container {
+        padding: 60px 16px 80px 16px;
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .title {
+        font-size: 28px;
+        margin-top: 20px;
+    }
+
+    .categories {
+        font-size: 20px;
+        gap: 15px;
+    }
+
     .menu-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 15px;
@@ -905,40 +1115,32 @@ footer {
         width: 120px;
         height: 120px;
     }
-    .categories {
-        font-size: 20px;
-        gap: 15px;
-    }
+
     .login-box {
         width: 98%;          /* nearly fills the phone screen */
         padding: 50px 25px;  /* bigger padding for phone screens */
         margin: 100px auto 80px;
-  }
+    }
 
+    .logo {
+        width: 170px;
+        height: 170px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
 
-  .logo {
-    width: 170px;
-    height: 170px;
-    border-radius: 50%;
-    object-fit: cover;
-  }
+    h1 {
+        font-size: 24px;
+    }
 
+    .description {
+        font-size: 16px;
+    }
 
-  h1 {
-    font-size: 24px;
-  }
-
-
-  .description {
-    font-size: 16px;
-  }
-
-
-  .role-btn {
-    padding: 22px;       /* bigger buttons for easy tapping */
-    font-size: 20px;
-  }
-
+    .role-btn {
+        padding: 22px;       /* bigger buttons for easy tapping */
+        font-size: 20px;
+    }
 }
 
 :root{--accent:#BA3801;--soft:#FFEC89;--blue:#4A69B3;--card:#F7BFA8}
@@ -947,7 +1149,10 @@ footer {
         /* dashboard-specific centering and layout */
         /* dashboard-specific centering removed so page styles match others */
 
-        /* ----- staff dashboard custom styles ----- */
+        /* =========================
+           STAFF DASHBOARD
+           staff-dashboard.html
+           ========================= */
         .dashboard .header-row {
             margin-bottom: 10px;
             display: flex;
@@ -1080,7 +1285,10 @@ footer {
             color: #fff;
         }
 
-/* Mobile Cart Page Styles */
+/* =========================
+   RESPONSIVE CART PAGE (MOBILE)
+   cart.html
+   ========================= */
 @media (max-width: 600px) {
     .container {
         padding: 70px 15px 100px 15px;
@@ -1105,6 +1313,9 @@ footer {
     .order-table {
         font-size: 14px;
         margin-bottom: 25px;
+        display: block;
+        width: 100%;
+        overflow-x: auto;  /* allow horizontal scroll if needed */
     }
 
     .order-table th,
@@ -1186,7 +1397,10 @@ footer {
     transform: translateX(-50%) translateY(0);
 }
 
-/* ORDER STATUS MODAL */
+/* =========================
+   ORDER STATUS MODAL
+   order-confirmation.html + canteen-menu.html (Track Order)
+   ========================= */
 .modal {
     position: fixed;
     top: 0;
@@ -1353,7 +1567,10 @@ footer {
     font-size: 11px;
 }
 
-/* RESPONSIVE MODAL */
+/* =========================
+   RESPONSIVE MODAL
+   (phones & tablets)
+   ========================= */
 @media (max-width: 768px) {
     .modal-content {
         width: 95%;

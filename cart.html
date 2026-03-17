@@ -11,6 +11,8 @@
     PerpetuaBites
 </header>
 
+<button class="back-btn" onclick="goBack()">←</button>
+
 <div class="container">
     <img src="images/logo.png" alt="Logo" class="logo">
     <h1>Your Cart</h1>
@@ -21,20 +23,12 @@
           <th>Item Name</th>
           <th>Price</th>
           <th>Quantity</th>
-          <th>Notes</th>
           <th>Subtotal</th>
           <th></th>
         </tr>
       </thead>
       <tbody id="orderTableBody">
         <!-- Orders will be populated here -->
-        <tr>
-          <td class="item-name">Sample Item</td>
-          <td class="price">₱75</td>
-          <td><input type="number" value="1" min="1" class="quantity-input" onchange="updateTotal()"></td>
-          <td><textarea placeholder="Add special notes..." class="note-input"></textarea></td>
-          <td class="price">₱75</td>
-        </tr>
       </tbody>
     </table>
 
@@ -44,16 +38,35 @@
         <span class="summary-label">Subtotal:</span>
         <span class="price">₱<span id="subtotal">75</span></span>
       </div>
-      <div class="summary-row">
-        <span class="summary-label">Delivery Fee:</span>
-        <span class="price">₱<span id="delivery">0</span></span>
+
+      <!-- Global Add-ons Section -->
+      <div class="addons-section" id="addonsSection">
+        <h3 style="color: #5670b0; margin-bottom: 15px;">Add-ons</h3>
+        <div class="addons-grid">
+          <label class="addon-item">
+            <input type="checkbox" class="addon-checkbox" data-price="15" onchange="updateTotal()"> Egg (+₱15)
+          </label>
+          <label class="addon-item">
+            <input type="checkbox" class="addon-checkbox" data-price="10" onchange="updateTotal()"> Sauce (+₱10)
+          </label>
+          <label class="addon-item">
+            <input type="checkbox" class="addon-checkbox" data-price="20" onchange="updateTotal()"> Extra Rice (+₱20)
+          </label>
+        </div>
+        <div class="addons-total" id="addonsTotal">Add-ons: ₱0</div>
       </div>
+
+      <!-- Global Order Notes -->
+      <div class="global-notes-section">
+        <label for="globalNotes">Order Notes (for all items):</label>
+        <textarea id="globalNotes" placeholder="e.g., Less spicy, no onions, delivery instructions..." rows="3" onchange="updateTotal()"></textarea>
+      </div>
+     
       <div class="total-price">
         <span class="total-label">TOTAL:</span>
         <span class="total-amount">₱<span id="totalAmount">225</span></span>
       </div>
     </div>
-
 
     <button class="confirm-btn" onclick="confirmOrder()">Confirm Order</button>
     <button class="back-to-menu-btn" onclick="goBackToMenu()">Back to Menu</button>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Sign Up - PerpetuaBites</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="top-bar">
+        PerpetuaBites
+    </header>
+
+    <button class="back-btn" onclick="goBack()">←</button>
+
+    <div class="login-box">
+        <img src="images/logo.png" alt="Logo" class="logo">
+        <h1>Create Account</h1>
+
+        <input type="email" id="email" placeholder="Email" autocomplete="email">
+        <input type="text" id="username" placeholder="Username" autocomplete="username">
+        <input type="password" id="password" placeholder="Password" autocomplete="new-password">
+
+        <button class="submit-btn" onclick="registerUser()">Sign Up</button>
+
+        <div style="margin-top:12px; text-align:center;">
+            <a href="customer-login.html" style="color: inherit; text-decoration: underline;">Already have an account? Log in</a>
+        </div>
+    </div>
+
+    <footer>
+        PerpetuaBites
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

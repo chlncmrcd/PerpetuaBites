@@ -11,17 +11,16 @@
 <header class="top-bar">
     PerpetuaBites 
     <div class="header-buttons">
-        <button class="track-btn" id="trackStatusBtn" onclick="showOrderStatus()" style="display:none;">📋 Track Order</button>
         <button class="cart-icon" onclick="goToCart()">🛒<span class="cart-badge" id="cartBadge">0</span></button>
     </div>
 </header>
 
+<button class="back-btn" onclick="goBack()">←</button>
+
 <div class="container">
 
     <!-- CANTEEN IMAGE -->
-    <div class="banner">
-        <img src="images/canteen-banner.jpg" alt="Canteen">
-    </div>
+    
 
     <!-- TITLE -->
     <h1 class="title">CANTEEN MENU</h1>
@@ -88,6 +87,11 @@
         
         <button class="btn btn-primary" onclick="closeOrderStatus()">Close</button>
     </div>
+</div>
+
+<!-- TRACK ORDER BUTTON (bottom center) -->
+<div class="track-bottom-wrapper">
+    <button class="track-btn" id="trackStatusBtn" onclick="showOrderStatus()" style="display:none;">📋 Track Order</button>
 </div>
 
 <!-- FOOTER -->

@@ -10,6 +10,7 @@
     <header class="top-bar">
      PerpetuaBites 
 </header>
+    <button class="back-btn" onclick="goBack()">←</button>
     <div class="container">
     <img src="images/logo.png" alt="Logo" class="logo">
 
@@ -60,7 +61,8 @@
       <!-- Time Estimate -->
       <div class="time-estimate">
         <div class="time-estimate-label">Estimated Wait Time:</div>
-        <div class="time-estimate-value">~15 minutes</div>
+<div class="time-estimate-value" id="timeEstimateValue">~15 minutes</div>
+
       </div>
 
 
@@ -89,8 +91,10 @@
     <!-- Action Buttons -->
     <div class="action-buttons">
       <button class="btn btn-track" onclick="trackOrder()">Track My Order</button>
+      <button class="btn btn-cancel" onclick="cancelOrder()">Cancel Order</button>
       <button class="btn btn-home" onclick="goHome()">Back to Menu</button>
     </div>
+
   </div>
 
 
